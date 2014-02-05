@@ -72,7 +72,7 @@ For those who are interested in the translating/editing process, source codes ar
 
 ##Technical details
 
-IOL problems are originally written in ``LaTeX``. For better font management and support for UTF-8 code，``IOL.cn`` uses ``XeLaTeX``.
+IOL problems are originally written in ``LaTeX``. For better font management and support for UTF-8 code, ``IOL.cn`` uses ``XeLaTeX``.
 
 For typographic considerations, Chinese fonts are chosen from those provided in ``OS X Mavericks``. For copyright consideration, please do not compile/revise the source codes if you are not using ``OS X Mavericks``. We are negotiating with the font maker concerning copyright issues. 
 
