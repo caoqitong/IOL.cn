@@ -1,4 +1,4 @@
-#IOL.cn (finished PDFs and source codes)
+#IOL.cn (finished PDFs & codes)
 
 Chinese translation for problems of the International Linguistics Olympiad (IOL)
 
