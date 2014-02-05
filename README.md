@@ -1,71 +1,88 @@
-#IOL.cn
+#IOL.cn (finished PDFs and source codes)
 
-Chinese translation for problems in the International Linguistics Olympiad
+Chinese translation for problems of the International Linguistics Olympiad (IOL)
 
-##文件结构
+##Overall
 
-每一届 IOL 赛题由三个文件组成，以第十届 IOL 的英语版为例，``IOL10.tex`` 为数据文件，``dxIOL10EN.tex`` 为英语相关内容的文件，``IOL10en.tex`` 引用前两者，为主文件。
+This page is for demonstration of the products of our translation project only. For current work, please refer to [our homepage](https://github.com/notcome/IOL.cn). 
 
-``dxIOL10EN.tex`` 由一连串的 ``\def`` 组成：
+##PDFs
+
+We present each year's problem set as a separate folder. Take ``IOL10``, which contains the following PDF files:
+
+``IOL10cn_IP.pdf`` (Individual contest problems.)
+
+``IOL10cn_IS.pdf`` (Individual contest solutions.)
+
+``IOL10cn_TP.pdf`` (Team contest problem.)
+
+``IOL10cn_TS.pdf`` (Team contest solution.)
+
+``IOL10cn_QR.pdf`` (Questionnaire [optional, given if included in the original file.])
+
+##Source codes
+
+For those who are interested in the translating/editing process, source codes are given in the corresponding folders. Still, take ``IOL10``:
+
+
+``dxIOL10CN.tex`` (Chinese translation), consisting of a series of ``\def``'s:
 
 ```LaTeX
-\def \thistext{English text}
-\def \nthIOL #1{#1 International Olympiad in Linguistics}
-\def \thisth{Tenth}
-\def \thisland{Slovenia}
-\def \thistown{Ljubljana}
-\def \Julyname{July}
-\def \Auguname{August}
-\def \olydates #1#2#3#4#5{#1 #2 – #3 #4 #5}
-\def \leafword #1{Sheet \##1}
-\def \probword #1{Problem \##1}
-\def \probsing #1{#1 Problem}
-\def \probplur #1{#1 Problems}
-\def \respsing #1{#1 Answers}
-\def \solusing #1{#1 Solution}
-\def \soluplur #1{#1 Solutions}
+\def \thistext{中文文本}
+\def \nthIOL #1{#1国际语言学奥林匹克竞赛}
+\def \thisth{第十届}
+\def \thisland{斯洛文尼亚}
+\def \thistown{卢布尔雅那}
+\def \Julyname{7月}
+\def \Auguname{8月}
+\def \olydates #1#2#3#4#5{#5年#2#1日 — #4#3日}
+\def \leafword #1{答题纸 \##1}
+\def \probword #1{题 \##1}
+\def \probsing #1{#1 题目}
+\def \probplur #1{#1 题目}
+\def \respsing #1{#1 答案}
+\def \solusing #1{#1 解答}
+\def \soluplur #1{#1 解答}
 ```
 
-``IOL10.tex`` 则会引用 ``dxIOL10XX.tex`` 中的定义，以此实现国际化。
+``IOL10.tex`` ("Universal" problem matter. In actual practice some slight modifications are made to this file for greater compatibility with the Chinese translation as well as proper display of the International Phonetic Alphabet (IPA) characters.) 
 
-``IOL10en.tex`` 是主文件，内容如下：
+``IOL10.nospace.tex`` (Chinese-specific (as the Chinese script normally does NOT contain spaces.) version of ``IOL10.tex``, which is by no means a misnomer.)
+
+``IOL10en.tex`` (Main file):
 
 ```LaTeX
 \documentclass[11pt]{article}
 \usepackage{a4wide}
-\usepackage[T3,T1]{fontenc}
-\usepackage[noenc]{tipa}
-\usepackage{tipx}
-\usepackage[notipa]{ucs}
-\usepackage[utf8x]{inputenc}
-\usepackage[english,UKenglish]{babel}
-\input{dxIOL10en}
-\newcommand \dmy [3]{#1/#2/#3} %%% UK, IE, OZ
-\newcommand \dialog {dialogue}
-\newcommand \axe {axe}
-\newcommand \ous {ou$_{\textrm{\small sg}}$}
-\newcommand \oup {ou$_{\textrm{\small pl}}$}
-\input{IOL10}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+% Chinese Font Selection
+% 宋体 and 楷体 are free fonts. Check out our GitHub repository to see the exact versions used.
+\setCJKmainfont[ItalicFont = Kaiti SC, SlantedFont = STFangsong, BoldFont = Songti SC Bold]{Songti SC}
+% Chinese Font Selection
+\setmainfont[BoldFont = CMUSerif-Bold]{CMUSerif-Roman}
+% "‘" & "’" might be recognized as CJK characters.
+% Numbers are changed to make the date nature.
+\normalspacedchars{‘’“”1234567890-—/}
+\input{dxIOL10CN}
+% Run RemoveSpace to get IOL10.nospace.tex
+\input{IOL10.nospace}
+
 ```
 
-理论上，翻译工作只需要在 ``dxIOLnCN.tex`` 中进行，这也是组委会如此编排文件的原因。但实际上，由于很多中文特色的原因（比如需要将所有的句点改成句号），我们也需要对 ``IOLn.tex`` 文件进行修改。
+##Technical details
 
-##目前状态
+IOL problems are originally written in ``LaTeX``. For better font management and support for UTF-8 code，``IOL.cn`` uses ``XeLaTeX``.
 
-已近完成的有第十届 IOL，即 IOL 2012。第九届 IOL，即 IOL 2011 的个人赛赛题及解答的翻译工作已完成，但团体赛方面进展缓慢。上述两届赛题的翻译尚未进行仔细的核查。
+For typographic considerations, Chinese fonts are chosen from those provided in ``OS X Mavericks``. For copyright consideration, please do not compile/revise the source codes if you are not using ``OS X Mavericks``. We are negotiating with the font maker concerning copyright issues. 
 
-此外，由于这两届赛题的翻译的主体编辑工作均由 [刘闽晟](https://github.com/notcome) 完成，其他人负责提供建议，所以源代码目前只保证能在 OS X 平台上编译通过。
+IOL's original font for Latin letters and numerals is ``Computer Modern``. For better display of the IPA characters, we have decided to change it into ``Computer Modern Unicode``.
 
-##有关技术细节
 
-IOL 试题原本使用 ``LaTeX``。考虑到 UTF-8 编码的支持和方便的字体管理，``IOL.cn`` 使用 ``XeLaTeX``。
+##Credits
 
-目前完成翻译的两届试题中，汉字的字体均使用 ``OS X`` 预装的字体，我们将考虑上传没有版权问题的、通用的汉字字体至项目仓库。
+Currently, document translation is mainly conducted by [Qitong Cao](https://github.com/caoqitong), whereas technical difficulties are usually resolved by [Minsheng Liu](https://github.com/notcome). 
 
-IOL 试题的英文字体用的是 ``Computer Modern``。出于一些已经被遗忘的原因（似乎跟国际音标输入有关），我们已经决定改为其 Unicode 版本 ``Computer Modern Unicode``。有关字体可以在 ``fonts`` 文件夹找到。
+We would like to acknowledge our gratitude toward [Ivan A Derzhanski](http://www.math.bas.bg/~iad/), who has kindly provided the English code files for our project.
 
-因为一些已经被遗忘的原因，``IOL10.tex`` 和 ``IOL9.tex`` 在翻译版本中被暴力修改，所有汉字间的空格被手动除去，所有半角标点符号被手工替换。最近 [刘闽晟](https://github.com/notcome) 实现了一个自动替换半角标点符号的宏，但目前还没有经过仔细测试，尚未合并至 ``IOL.cn`` 中。
-
-##感谢
-
-在此感谢 [Ivan A Derzhanski](http://www.math.bas.bg/~iad/) 先生对我们的翻译项目的支持。感谢他为我们提供 IOL 题目的源文件并给我们的翻译提供建议。
+IOL.cn is a non-profit project aimed at promoting the International Linguistics Olympiad and general linguistics education in China. 
